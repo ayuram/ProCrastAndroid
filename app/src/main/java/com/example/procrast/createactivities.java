@@ -15,11 +15,6 @@ public class createactivities extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createactivities);
         final EditText pretext = (EditText)findViewById(R.id.editText);
-        final int id = getIntent().getExtras().getInt("customer");
-
-        if(getIntent().hasExtra("prename")){
-            pretext.setText(getIntent().getExtras().getString("prename"));
-        }
         final String original = pretext.getText().toString();
         Button save = (Button)findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
@@ -27,7 +22,6 @@ public class createactivities extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(createactivities.this, MainActivity.class);
                 intent.putExtra("nameChange", pretext.getText().toString());
-                intent.putExtra("customer", id);
                 startActivity(intent);
             }
         });
@@ -35,7 +29,7 @@ public class createactivities extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pretext.setText(original);
+                pretext.setText("");
             }
         });
     }

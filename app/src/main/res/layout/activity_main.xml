@@ -22,86 +22,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView2"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:autoText="false"
-            android:capitalize="none"
-            android:foregroundGravity="top|left"
-            android:text="Activities"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#009688"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            app:autoSizeTextType="none"
-            app:fontFamily="sans-serif-black" />
+            android:orientation="horizontal">
 
-        <ScrollView
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:autoText="false"
+                android:capitalize="none"
+                android:foregroundGravity="top|left"
+                android:text="Activities"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="#009688"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                app:autoSizeTextType="none"
+                app:fontFamily="sans-serif-black" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
 
-            <LinearLayout
-                android:id="@+id/fields"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="TextView" />
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:clickable="true"
-                        app:backgroundTint="@android:color/holo_green_light"
-                        app:fabSize="mini"
-                        app:rippleColor="@color/design_default_color_primary"
-                        app:srcCompat="@android:drawable/ic_menu_preferences" />
-
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/add"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:clickable="true"
-                        android:focusable="true"
-                        app:backgroundTint="@color/colorPrimary"
-                        app:rippleColor="@color/design_default_color_primary"
-                        app:srcCompat="@android:drawable/ic_input_add" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </ScrollView>
+                android:layout_weight="0"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@color/colorPrimary"
+                app:rippleColor="@color/design_default_color_primary"
+                app:srcCompat="@android:drawable/ic_input_add" />
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

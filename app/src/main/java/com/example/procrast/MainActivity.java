@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,37 +20,35 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<String> names = new ArrayList<String>();
+    private DataStruct data = new DataStruct();
+    private ArrayList<String> names;
+    ListView listView;
+    FloatingActionButton nextActivity;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        names = new ArrayList<String>();
         setContentView(R.layout.activity_main);
-        final TextView textView = (TextView)findViewById(R.id.tv1);
-        textView.setId(0);
-        names.add(textView.getText().toString());
+        listView = (ListView)findViewById(R.id.list);
         if(getIntent().getExtras() != null){
-            String name = getIntent().getExtras().getString("nameChange");
-            textView.setText(name);
-            names.set(0, name);
-        }
-        final FloatingActionButton addAct = (FloatingActionButton)findViewById(R.id.add);
-        addAct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addField("text");
-
+            if(savedInstanceState != null) {
+                names = savedInstanceState.getStringArrayList("names");
+                System.out.print("YES!");
             }
-        });
-        final String string = textView.getText().toString();
-
-        final FloatingActionButton nextActivity = (FloatingActionButton)findViewById(R.id.edit);
+            String name = getIntent().getExtras().getString("nameChange");
+            data.activities.add(new Activity(name));
+            names.add(name);
+        }
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, names);
+        listView.setAdapter(arrayAdapter);
+        nextActivity = (FloatingActionButton)findViewById(R.id.add);
         nextActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, createactivities.class);
-                intent.putExtra("prename",  string);
-                intent.putExtra("customer", textView.getId());
                 startActivity(intent);
+                data.activities.add(new Activity("Carlos"));
+                //savedInstanceState.putStringArrayList("names", names);
             }
         });
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         // Save UI state changes to the savedInstanceState.
         // This bundle will be passed to onCreate if the process is
         // killed and restarted.
-        savedInstanceState.putStringArrayList("list", names);
+        savedInstanceState.putStringArrayList("names", names);
         // etc.
     }
 
@@ -69,43 +69,40 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         // Restore UI state from the savedInstanceState.
         // This bundle has also been passed to onCreate.
-        ArrayList<String> list = savedInstanceState.getStringArrayList("list");
-        for(int i = 0; i < list.size(); i++){
-            addField(list.get(i));
-        }
+        names = savedInstanceState.getStringArrayList("names");
     }
 
 
-    public void addField(String tempName){
-        Button myButton = new Button(this);
+//    public void addField(String tempName){
+//        Button myButton = new Button(this);
+//
+//        final TextView textView = new TextView(this);
+//        textView.setText(tempName);
+//        textView.setId(names.size());
+//        names.add(textView.getText().toString());
+//        myButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, createactivities.class);
+//                intent.putExtra("prename", textView.getText().toString());
+//                intent.putExtra("customer", textView.getId());
+//                startActivity(intent);
+//            }
+//        });
+//        LinearLayout layout = new LinearLayout(this);
+//        layout.addView(textView);
+//        layout.addView(myButton);
+//        layout.setOrientation(LinearLayout.HORIZONTAL);
+//        LinearLayout ll = (LinearLayout)findViewById(R.id.fields);
+//        ll.addView(layout);
+//    }
 
-        final TextView textView = new TextView(this);
-        textView.setText(tempName);
-        textView.setId(names.size());
-        names.add(textView.getText().toString());
-        myButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, createactivities.class);
-                intent.putExtra("prename", textView.getText().toString());
-                intent.putExtra("customer", textView.getId());
-                startActivity(intent);
-            }
-        });
-        LinearLayout layout = new LinearLayout(this);
-        layout.addView(textView);
-        layout.addView(myButton);
-        layout.setOrientation(LinearLayout.HORIZONTAL);
-        LinearLayout ll = (LinearLayout)findViewById(R.id.fields);
-        ll.addView(layout);
-    }
-
-    public void checkIntents(){
-        Bundle extras = getIntent().getExtras();
-        if(getIntent().hasExtra("nameChange")){
-            int id = extras.getInt("id");
-            TextView view = (TextView)findViewById(id);
-            view.setText(extras.getString("nameChange"));
-        }
-    }
+//    public void checkIntents(){
+//        Bundle extras = getIntent().getExtras();
+//        if(getIntent().hasExtra("nameChange")){
+//            int id = extras.getInt("id");
+//            TextView view = (TextView)findViewById(id);
+//            view.setText(extras.getString("nameChange"));
+//        }
+//    }
 }
