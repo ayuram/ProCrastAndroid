@@ -73,36 +73,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public void addField(String tempName){
-//        Button myButton = new Button(this);
-//
-//        final TextView textView = new TextView(this);
-//        textView.setText(tempName);
-//        textView.setId(names.size());
-//        names.add(textView.getText().toString());
-//        myButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, createactivities.class);
-//                intent.putExtra("prename", textView.getText().toString());
-//                intent.putExtra("customer", textView.getId());
-//                startActivity(intent);
-//            }
-//        });
-//        LinearLayout layout = new LinearLayout(this);
-//        layout.addView(textView);
-//        layout.addView(myButton);
-//        layout.setOrientation(LinearLayout.HORIZONTAL);
-//        LinearLayout ll = (LinearLayout)findViewById(R.id.fields);
-//        ll.addView(layout);
-//    }
+    public void addField(String tempName){
+        Button myButton = new Button(this);
 
-//    public void checkIntents(){
-//        Bundle extras = getIntent().getExtras();
-//        if(getIntent().hasExtra("nameChange")){
-//            int id = extras.getInt("id");
-//            TextView view = (TextView)findViewById(id);
-//            view.setText(extras.getString("nameChange"));
-//        }
-//    }
+        final TextView textView = new TextView(this);
+        textView.setText(tempName);
+        textView.setId(names.size());
+        names.add(textView.getText().toString());
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, createactivities.class);
+                intent.putExtra("prename", textView.getText().toString());
+                intent.putExtra("customer", textView.getId());
+                startActivity(intent);
+            }
+        });
+        LinearLayout layout = new LinearLayout(this);
+        layout.addView(textView);
+        layout.addView(myButton);
+        layout.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout ll = (LinearLayout)findViewById(R.id.fields);
+        ll.addView(layout);
+    }
+
+    public void checkIntents(){
+        Bundle extras = getIntent().getExtras();
+        if(getIntent().hasExtra("nameChange")){
+            int id = extras.getInt("id");
+            TextView view = (TextView)findViewById(id);
+            view.setText(extras.getString("nameChange"));
+        }
+    }
 }
